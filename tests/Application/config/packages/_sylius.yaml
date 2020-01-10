@@ -18,3 +18,9 @@ sylius_promotion:
         promotion_coupon:
             classes:
                 model: Tests\Acme\SyliusExamplePlugin\Application\Entity\PromotionCoupon
+
+sylius_product:
+    resources:
+        product:
+            classes:
+                repository: Acme\SyliusExamplePlugin\ProductRepository

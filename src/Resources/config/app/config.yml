@@ -1,0 +1,47 @@
+winzou_state_machine:
+    sylius_order_payment:
+        callbacks:
+            after:
+                app_add_x_to_the_name:
+                    on: ["pay"]
+                    do: ['@Acme\SyliusExamplePlugin\Listener\AddXToTheNameListener', "__invoke"]
+                    args: ["object"]
+
+sylius_grid:
+    grids:
+        acme_sylius_example_product_search:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product.class%"
+                    repository:
+                        method: createProductSearchQueryBuilder
+                        arguments:
+                            channel: "expr:service('sylius.context.channel').getChannel()"
+                            locale: "expr:service('sylius.context.locale').getLocaleCode()"
+                            sorting: "expr:service('request_stack').getCurrentRequest().get('sorting', [])"
+            sorting:
+                name: asc
+            limits: [9, 18, 27]
+            fields:
+                createdAt:
+                    type: datetime
+                    sortable: ~
+                position:
+                    type: string 
+                    sortable: productTaxon.position
+                name:
+                    type: string 
+                    sortable: translation.name
+                price:
+                    type: int
+                    sortable: channelPricing.price
+            filters:
+                search:
+                    type: shop_string
+                    label: false
+                    options:
+                        fields: [translation.name]
+                    form_options:
+                        type: contains
+

@@ -16,3 +16,12 @@ acme_sylius_example_generate_referral_coupon:
     path: /generate-referral-coupon
     defaults:
         _controller: Acme\SyliusExamplePlugin\Controller\ReferralPromotionCouponController:generateAction
+
+acme_sylius_example_search:
+    path: /search-products
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: "@AcmeSyliusExamplePlugin/search.html.twig"
+            grid: acme_sylius_example_product_search

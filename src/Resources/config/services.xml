@@ -2,13 +2,15 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="Acme\SyliusExamplePlugin\Listener\AddXToTheNameListener" public="true">
+            <argument type="service" id="sylius.manager.customer" />
+        </service>
+
         <service id="Acme\SyliusExamplePlugin\Controller\ReferralPromotionCouponController">
             <argument type="service" id="sylius.repository.promotion" />
             <argument type="service" id="sylius.factory.promotion_coupon" />
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <tag name="controller.service_arguments" />
         </service>
-
-        <!-- d96c884b8e29922e04a5823cda613647 -->
     </services>
 </container>
